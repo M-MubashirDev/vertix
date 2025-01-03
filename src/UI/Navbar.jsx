@@ -56,8 +56,8 @@
 
 // export default Navbar;
 import { useState } from "react";
+import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FaUserPlus } from "react-icons/fa"; // Icon for creating a new admin
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

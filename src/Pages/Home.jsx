@@ -1,4 +1,3 @@
-import React from "react";
 import AdminsTable from "../Components/AdminsTable";
 
 const Home = () => {
