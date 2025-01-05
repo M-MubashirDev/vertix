@@ -74,7 +74,7 @@ const Navbar = () => {
           {/* Add "Create New Admin" link */}
           <li>
             <Link
-              to="/create-admin"
+              to="/admin"
               className="flex items-center space-x-2 hover:text-neutral-light transition duration-200"
             >
               <FaUserPlus />
@@ -94,7 +94,7 @@ const Navbar = () => {
           {/* Add "Create New Admin" link for mobile */}
           <li>
             <Link
-              to="/create-admin"
+              to="admin"
               className="flex items-center space-x-2 hover:text-primary-light transition duration-200"
             >
               <FaUserPlus />
