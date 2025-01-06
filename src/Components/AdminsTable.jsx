@@ -1,44 +1,45 @@
 import { FaEdit, FaTrashAlt, FaEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Dropdown from "../UI/DropDown";
 
-const admins = [
-  {
-    id: 1,
-    name: "Johnathan Christopher Doe III",
-    email: "johnathan.christopher.doe@example.com",
-    phone: "123-456-7890",
-    clients: 20,
-    img: "https://via.placeholder.com/40",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    phone: "987-654-3210",
-    clients: 15,
-    img: "https://via.placeholder.com/40",
-  },
-];
-
-const dropdownItems = [
-  {
-    label: "View",
-    icon: <FaEye />,
-    onClick: () => alert("View clicked"),
-  },
-  {
-    label: "Edit",
-    icon: <FaEdit />,
-    onClick: () => alert("Edit clicked"),
-  },
-  {
-    label: "Delete",
-    icon: <FaTrashAlt />,
-    onClick: () => alert("Delete clicked"),
-  },
-];
-
 const AdminsTable = () => {
+  const navigate = useNavigate();
+  const admins = [
+    {
+      id: 1,
+      name: "Johnathan Christopher Doe III",
+      email: "johnathan.christopher.doe@example.com",
+      phone: "123-456-7890",
+      clients: 20,
+      img: "https://via.placeholder.com/40",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      phone: "987-654-3210",
+      clients: 15,
+      img: "https://via.placeholder.com/40",
+    },
+  ];
+
+  const dropdownItems = [
+    {
+      label: "View",
+      icon: <FaEye />,
+      onClick: () => navigate("view"),
+    },
+    {
+      label: "Edit",
+      icon: <FaEdit />,
+      onClick: () => alert("Edit clicked"),
+    },
+    {
+      label: "Delete",
+      icon: <FaTrashAlt />,
+      onClick: () => alert("Delete clicked"),
+    },
+  ];
   return (
     <div className="mt-6 bg-background p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-bold text-primary-dark mb-4">Admin List</h2>
@@ -89,7 +90,7 @@ const AdminsTable = () => {
                   {admin.phone}
                 </td>
                 <td className="py-3 px-4 text-center w-1/6">{admin.clients}</td>
-                <td className="py-3 px-4 relative w-1/6">
+                <td className="py-3 px-4 relative text-end w-1/6">
                   <Dropdown
                     items={dropdownItems}
                     buttonClassName="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
