@@ -59,3 +59,8 @@ span {
     background: transparent;
   }
 }
+.recharts-bar-rectangle:hover {
+  fill: #1a2834 !important; /* Same color as your normal fill */
+  stroke: #0099ff !important; /* Same stroke as normal (or 'none') */
+  outline: none !important;
+}

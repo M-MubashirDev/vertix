@@ -1,6 +1,47 @@
 import AdminsTable from "../Components/AdminsTable";
+import AdminClientChart from "../Components/Chart";
 
 const Home = () => {
+  const adminClientData = {
+    labels: [
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+      "John Doe",
+      "Jane Smith",
+      "Admin 3",
+      "Admin 4",
+    ], // Replace with actual admin names
+    values: [
+      20, 15, 25, 1020, 15, 25, 10, 40, 15, 25, 1020, 15, 25, 10, 40, 15, 25,
+      1020, 15, 25, 10, 40, 15, 25, 1020, 15, 25, 10, 40,
+    ], // Replace with actual number of clients managed by each admin
+  };
   return (
     <div className="p-6 bg-background min-h-screen">
       <h1 className="text-3xl font-bold text-primary-dark mb-4">
@@ -10,28 +51,11 @@ const Home = () => {
         Here is an overview of the system:
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 shadow rounded-lg text-center">
-          <h2 className="text-xl font-bold text-primary-dark">Total Admins</h2>
-          <p className="text-3xl text-secondary">50</p>
-        </div>
-        <div className="bg-white p-6 shadow rounded-lg text-center">
-          <h2 className="text-xl font-bold text-primary-dark">Total Clients</h2>
-          <p className="text-3xl text-secondary">300</p>
-        </div>
-        <div className="bg-white p-6 shadow rounded-lg">
-          <h2 className="text-xl font-bold text-primary-dark">
-            Recent Activities
-          </h2>
-          <ul className="list-disc list-inside mt-4 text-neutral-dark">
-            <li>Admin John Doe created a new client</li>
-            <li>Admin Jane Smith updated client details</li>
-            <li>Client Smith booked a car wash service</li>
-          </ul>
-        </div>
-      </div>
-
       <AdminsTable />
+      <div className="flex flex-wrap justify-center gap-16 min-w-full  mb-12">
+        {" "}
+        <AdminClientChart data={adminClientData} />
+      </div>
     </div>
   );
 };
