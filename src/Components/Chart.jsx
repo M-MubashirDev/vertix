@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useMediaQuery } from "react-responsive";
+import { useAdminContext } from "../Hooks/AdminContext";
 
 const data = [
   { name: "Admin 1", clients: 30 },
@@ -34,6 +35,9 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const AdminClientChart = () => {
+  const { admin } = useAdminContext();
+  const { dataAdmins, pendinAdmins } = admin;
+  console.log(dataAdmins);
   const isSmallScreen = useMediaQuery({ maxWidth: 640 });
 
   return (

@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Login from "./Pages/Login";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import AdminContext from "./Hooks/AdminContext";
+import Edit from "./Pages/Edit";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -21,13 +23,16 @@ function App() {
             path="/"
             element={
               <ProtectedRoute>
-                <Layout />
+                <AdminContext>
+                  <Layout />
+                </AdminContext>
               </ProtectedRoute>
             }
           >
             <Route index element={<Home />} />
             <Route path="admin" element={<Admin />} />
-            <Route path="view" element={<View />} />
+            <Route path="view/:adminId" element={<View />} />
+            <Route path="edit/:adminId" element={<Edit />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

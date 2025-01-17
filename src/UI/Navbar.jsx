@@ -71,17 +71,23 @@ import { useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ExpandableButton from "./ExpandableButton";
-import { RiLogoutBoxFill, RiLogoutCircleLine } from "react-icons/ri";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  function logout() {
+    localStorage.removeItem("authToken");
+  }
   return (
     <nav className="bg-primary-dark text-white p-4 max-w-[1440px] mx-auto rounded-b-md w-[90%]">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
           <Link to="/" className="text-secondary-light">
-            LOGO
+            <img
+              src="logowhite.png"
+              alt="LOGO"
+              className="max-w-32 min-w-32 w-32  "
+            />
           </Link>
         </div>
         <ul className="hidden md:flex space-x-8 items-center">
@@ -97,9 +103,9 @@ const Navbar = () => {
               />
             </Link>
           </li>
-          <li>
+          <li onClick={logout}>
             <Link
-              to="/admin"
+              to="/login"
               className="flex items-center space-x-2 hover:text-neutral-light transition duration-200"
             >
               <ExpandableButton

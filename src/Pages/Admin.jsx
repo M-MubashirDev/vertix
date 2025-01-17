@@ -73,7 +73,7 @@ function Admin() {
             name="fileInput"
             multiple={false}
             accept="image/*" // Accept all file types
-            validation={{ required: "File is required" }}
+            // validation={{ required: "File is required" }}
           />
 
           <CustomForm.ButtonSubmit>Sign In</CustomForm.ButtonSubmit>

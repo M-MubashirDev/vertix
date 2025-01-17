@@ -3,7 +3,7 @@ import Navbar from "../UI/Navbar";
 
 function Layout() {
   return (
-    <div>
+    <div className="">
       <Navbar />
       <div className="max-w-[1440px] mx-auto w-[90%]">
         <Outlet />

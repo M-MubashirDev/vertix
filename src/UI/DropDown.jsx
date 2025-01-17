@@ -5,10 +5,10 @@ const Dropdown = ({
   buttonClassName,
   dropdownClassName,
   items,
+  value,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-
   // Toggle dropdown visibility
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
@@ -51,7 +51,7 @@ const Dropdown = ({
             {items.map((item, index) => (
               <li key={index}>
                 <button
-                  onClick={item.onClick}
+                  onClick={() => item.Click(value)}
                   className="flex items-center w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   {item.icon && <span className="mr-2">{item.icon}</span>}

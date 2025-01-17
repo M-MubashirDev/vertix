@@ -1,17 +1,22 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { postAdmin } from "../../Services/Admin";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  deleteAdmins,
+  getAdmins,
+  postAdmin,
+  updateAdmins,
+} from "../../Services/Admin";
 import toast from "react-hot-toast";
 
-export function useNewAdmin() {
+export function UsegetAdmins() {
   const {
-    data: newAdminData,
-    isPending: pendingAdmin,
+    data: dataAdmins,
+    isPending: pendinAdmins,
     error,
   } = useQuery({
-    queryKey: ["newAdmin"],
-    queryFn: () => postAdmin({ api: "newAdmin" }),
+    queryKey: ["getAdmins"],
+    queryFn: () => getAdmins({ url: "get-all-admins" }),
   });
-  return { newAdminData, pendingAdmin, error };
+  return { dataAdmins, pendinAdmins, error };
 }
 // hooks/usePostAdmin.js
 
@@ -32,4 +37,44 @@ export function useNewAdminMutate() {
   });
 
   return { mutateAdmin, isPending, isSuccess };
+}
+export function useDeleteAdminMutate() {
+  const queryClient = useQueryClient();
+  const {
+    mutate: deleteAdmin,
+    isLoading: isPendingDelete,
+    isSuccess,
+  } = useMutation({
+    mutationFn: deleteAdmins,
+    onSuccess: () => {
+      toast.success("Admin has been Deleted");
+      queryClient.invalidateQueries(["getAdmins"]);
+    },
+    onError: (error) => {
+      toast.error("Please Try Again: " + error.message);
+      console.error("deletion Error:", error);
+    },
+  });
+
+  return { deleteAdmin, isPendingDelete, isSuccess };
+}
+export function useUpdateAdminMutate() {
+  const queryClient = useQueryClient();
+  const {
+    mutate: updateAdmin,
+    isLoading: isPendingUpdate,
+    isSuccess,
+  } = useMutation({
+    mutationFn: updateAdmins, // The update function you’ve defined earlier
+    onSuccess: () => {
+      toast.success("Admin has been Updated");
+      queryClient.invalidateQueries(["getAdmins"]);
+    },
+    onError: (error) => {
+      toast.error("Please Try Again: " + error.message);
+      console.error("update Error:", error);
+    },
+  });
+
+  return { updateAdmin, isPendingUpdate, isSuccess };
 }
