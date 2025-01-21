@@ -37,7 +37,6 @@ const CustomTooltip = ({ active, payload }) => {
 const AdminClientChart = () => {
   const { admin } = useAdminContext();
   const { dataAdmins, pendinAdmins } = admin;
-  console.log(dataAdmins);
   const isSmallScreen = useMediaQuery({ maxWidth: 640 });
 
   return (

@@ -1,4 +1,3 @@
-import axios from "axios";
 import useMutateLoginSuperAdmin from "../Hooks/SuperAdmin/useMutateLoginSuperAdmin";
 import Form from "../UI/Form";
 
@@ -19,7 +18,7 @@ function Login() {
         {/* Logo Section */}
         <div className="flex justify-center mb-6">
           <img
-            src="/path-to-your-logo.png" // Replace with your logo path
+            src="logo.png" // Replace with your logo path
             alt="Logo"
             className="h-16 w-auto"
           />

@@ -14,7 +14,7 @@ async function postAdmin({ url, data }) {
         },
       }
     );
-
+    console.log(response);
     return response;
   } catch (err) {
     HandleError(err);

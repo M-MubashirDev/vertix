@@ -21,6 +21,7 @@ export function UsegetAdmins() {
 // hooks/usePostAdmin.js
 
 export function useNewAdminMutate() {
+  const queryClient = useQueryClient();
   const {
     mutate: mutateAdmin,
     isLoading: isPending,
@@ -29,6 +30,7 @@ export function useNewAdminMutate() {
     mutationFn: postAdmin,
     onSuccess: () => {
       toast.success("Admin has been created");
+      queryClient.invalidateQueries(["getAdmins"]);
     },
     onError: (error) => {
       toast.error("Please Try Again: " + error.message);

@@ -5,7 +5,7 @@ const adminContext = createContext();
 
 function AdminContext({ children }) {
   const { dataAdmins, pendinAdmins } = UsegetAdmins(); // Fetches admin data
-
+  // const { usersOfAdmin } = UsegetUser;
   return (
     <adminContext.Provider
       value={{

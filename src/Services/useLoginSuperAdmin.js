@@ -6,8 +6,11 @@ const loginsuperAdmin = async ({ email, password }) => {
       email,
       password,
     });
+    if (response?.data?.user?.role !== "superadmin") {
+      throw new Error("Wronge Cradentials for SUperAdmin");
+    }
     const { token } = response.data;
-    console.log(response);
+
     localStorage.setItem("authToken", token);
     return { success: true, token };
   } catch (error) {

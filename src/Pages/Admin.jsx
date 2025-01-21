@@ -11,6 +11,7 @@ function Admin() {
       firstname: values.firstname,
       lastname: values.lastname,
       email: values.email,
+      image: "",
       password: values.password,
       cellno: values.number,
     };
@@ -70,7 +71,7 @@ function Admin() {
           />
           <CustomForm.FileInput
             label="Upload File"
-            name="fileInput"
+            name="image"
             multiple={false}
             accept="image/*" // Accept all file types
             // validation={{ required: "File is required" }}

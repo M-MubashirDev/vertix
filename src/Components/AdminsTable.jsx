@@ -8,7 +8,6 @@ const AdminsTable = () => {
   const navigate = useNavigate();
   const { admin } = useAdminContext();
   const { dataAdmins, pendinAdmins } = admin;
-  console.log(admin);
   const { deleteAdmin, isPendingDelete } = useDeleteAdminMutate();
   const dropdownItems = [
     {
@@ -31,7 +30,6 @@ const AdminsTable = () => {
       Click: (value) => {
         if (!value) return;
         deleteAdmin({ url: `delete-admin`, id: value._id });
-        console.log("value", value);
       },
     },
   ];
@@ -77,7 +75,7 @@ const AdminsTable = () => {
                 >
                   <td className="py-3 px-4 flex items-center space-x-4 w-1/4">
                     <img
-                      src={admin.image || "https://via.placeholder.com/150"}
+                      src={admin.image}
                       alt={`${admin.firstname} ${admin.lastname}`}
                       className="min-w-10 h-10 rounded-full border border-gray-300"
                     />
