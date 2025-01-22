@@ -11,7 +11,6 @@ async function getServiceStations({ url }) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (err) {
     HandleError(err);

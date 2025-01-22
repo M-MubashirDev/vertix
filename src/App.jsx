@@ -11,6 +11,9 @@ import Login from "./Pages/Login";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import AdminContext from "./Hooks/AdminContext";
 import Edit from "./Pages/Edit";
+import Packages from "./Pages/Packages";
+import ViewAdmin from "./Pages/ViewAdmin";
+import RegisterUserDetails from "./Pages/RegisterUserDetails";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -31,7 +34,12 @@ function App() {
           >
             <Route index element={<Home />} />
             <Route path="admin" element={<Admin />} />
-            <Route path="view/:adminId" element={<View />} />
+            <Route path="view/:adminId" element={<View />}>
+              <Route index element={<ViewAdmin />} />
+              <Route path="services/:stationId" element={<Packages />} />
+              <Route path="registerUsers" element={<RegisterUserDetails />} />
+            </Route>
+
             <Route path="edit/:adminId" element={<Edit />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
