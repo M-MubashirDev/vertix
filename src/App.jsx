@@ -14,6 +14,7 @@ import Edit from "./Pages/Edit";
 import Packages from "./Pages/Packages";
 import ViewAdmin from "./Pages/ViewAdmin";
 import RegisterUserDetails from "./Pages/RegisterUserDetails";
+import CreateStations from "./Pages/CreateStations";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -37,7 +38,11 @@ function App() {
             <Route path="view/:adminId" element={<View />}>
               <Route index element={<ViewAdmin />} />
               <Route path="services/:stationId" element={<Packages />} />
-              <Route path="registerUsers" element={<RegisterUserDetails />} />
+              <Route
+                path="registerUsers/:stationId"
+                element={<RegisterUserDetails />}
+              />
+              <Route path="stations" element={<CreateStations />} />
             </Route>
 
             <Route path="edit/:adminId" element={<Edit />} />

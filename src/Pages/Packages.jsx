@@ -4,7 +4,7 @@ import CarWashServicesCard from "../UI/CarWashServicesCard";
 
 function Packages() {
   const { dataPackages, pendingPackage } = UsegetStationsPackages(); // Fetch data using your custom hook
-
+  console.log(dataPackages, "😊😊");
   return (
     <section>
       <div className="min-h-screen">
