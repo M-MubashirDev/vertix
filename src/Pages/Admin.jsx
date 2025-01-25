@@ -6,7 +6,7 @@ function Admin() {
 
   function submitFunc(values) {
     if (!values) return;
-    console.log(values);
+    console.log(values.profileImage);
     const data = {
       firstname: values.firstname,
       lastname: values.lastname,
@@ -70,11 +70,14 @@ function Admin() {
             }}
           />
           <CustomForm.FileInput
-            label="Upload File"
-            name="image"
-            multiple={false}
-            accept="image/*" // Accept all file types
-            // validation={{ required: "File is required" }}
+            label="Upload Image"
+            name="profileImage"
+            accept="image/*"
+            // validation={{
+            //   required: "Image is required",
+            //   validate: (value) =>
+            //     value.size < 5 * 1024 * 1024 || "File must be less than 5MB",
+            // }}
           />
 
           <CustomForm.ButtonSubmit>Sign In</CustomForm.ButtonSubmit>
