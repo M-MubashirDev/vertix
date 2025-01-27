@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePostStationMutate } from "../Hooks/Admin/useServiceStations";
 import Form from "../UI/Form";
 
 function CreateStations() {
+  const navigate = useNavigate();
   const { adminId } = useParams();
   const { postStations, isPendingStation } = usePostStationMutate();
 
@@ -13,6 +14,7 @@ function CreateStations() {
       data: { adminId: adminId, ...data },
     });
   };
+  console.log(isPendingStation);
 
   return (
     <div className=" mt-10  p-8 rounded-lg ">
@@ -54,7 +56,19 @@ function CreateStations() {
         <Form.FileInput label="Station Image" name="image" accept="image/*" />
 
         {/* Submit Button */}
-        <Form.ButtonSubmit>Create Station</Form.ButtonSubmit>
+        {/* <Form.ButtonSubmit>Create Station</Form.ButtonSubmit> */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:max-w-[50rem]">
+          <Form.ButtonSubmit isSubmitting={isPendingStation}>
+            Create Station{" "}
+          </Form.ButtonSubmit>
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="w-full bg-gray-200  text-gray-700 py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
       </Form>
     </div>
   );

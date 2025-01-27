@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAdminContext } from "../Hooks/AdminContext";
 import Form from "../UI/Form";
 import { useUpdateAdminMutate } from "../Hooks/Admin/useAdmin";
@@ -9,6 +9,7 @@ function Edit() {
   const { dataAdmins } = admin;
   const { admins } = dataAdmins || {};
   const currentAdmin = admins?.find((val) => val._id === adminId);
+  const navigate = useNavigate();
 
   const { updateAdmin, isPendingUpdate } = useUpdateAdminMutate(); //update api
 
@@ -50,7 +51,19 @@ function Edit() {
         <Form.Input label="Last Name" name="lastname" />
         <Form.Input label="Email" name="email" type="email" />
         <Form.Input label="Phone Number" name="cellno" />
-        <Form.ButtonSubmit>Save Changes</Form.ButtonSubmit>
+        {/* <Form.ButtonSubmit>Save Changes</Form.ButtonSubmit> */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:max-w-[50rem]">
+          <Form.ButtonSubmit isSubmitting={isPendingUpdate}>
+            Save Changes
+          </Form.ButtonSubmit>
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="w-full bg-gray-200  text-gray-700 py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
       </Form>
     </div>
   );

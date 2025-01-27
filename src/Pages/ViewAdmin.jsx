@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import ButtonShin from "../UI/ButtonShin";
 import { useEffect } from "react";
+import FullPageSpinner from "../UI/Spinner";
 
 function ViewAdmin() {
   const { adminId } = useParams();
@@ -53,6 +54,7 @@ function ViewAdmin() {
       </div>
     );
   }
+  if (pendinStation || pendinAdmins) <FullPageSpinner />;
 
   return (
     <div className="py-8">
@@ -153,6 +155,7 @@ function ViewAdmin() {
               >
                 {/* Top-right Delete Icon */}
                 <button
+                  disabled={isPendingDelete}
                   title="Delete Station"
                   className="absolute top-4 right-4 bg-red-500 text-white p-2 rounded-full shadow-md hover:bg-red-700 transition duration-300"
                   onClick={() => delFunction(station._id)}

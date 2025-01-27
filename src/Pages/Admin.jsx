@@ -1,9 +1,11 @@
 import CustomForm from "../UI/Form";
 import BackButton from "../UI/BackButton";
 import { useNewAdminMutate } from "../Hooks/Admin/useAdmin";
+import FullPageSpinner from "../UI/Spinner";
+import { useNavigate } from "react-router-dom";
 function Admin() {
   const { mutateAdmin, isPending: newAdminPend } = useNewAdminMutate();
-
+  const navigate = useNavigate();
   function submitFunc(values) {
     if (!values) return;
     console.log(values.profileImage);
@@ -17,6 +19,7 @@ function Admin() {
     };
     mutateAdmin({ url: "create-admin", data });
   }
+  if (newAdminPend) return <FullPageSpinner />;
   return (
     <div className="mt-8">
       <BackButton />
@@ -80,7 +83,19 @@ function Admin() {
             // }}
           />
 
-          <CustomForm.ButtonSubmit>Sign In</CustomForm.ButtonSubmit>
+          {/* <CustomForm.ButtonSubmit>New Admin</CustomForm.ButtonSubmit> */}
+          <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:max-w-[50rem]">
+            <CustomForm.ButtonSubmit isSubmitting={newAdminPend}>
+              Save Changes
+            </CustomForm.ButtonSubmit>
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="w-full bg-gray-200  text-gray-700 py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
         </CustomForm>
       </div>
     </div>

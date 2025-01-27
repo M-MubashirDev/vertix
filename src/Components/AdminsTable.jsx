@@ -132,6 +132,7 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../UI/DropDown";
 import { useDeleteAdminMutate } from "../Hooks/Admin/useAdmin";
 import { useAdminContext } from "../Hooks/AdminContext";
+import FullPageSpinner from "../UI/Spinner";
 
 const AdminsTable = () => {
   const navigate = useNavigate();
@@ -191,13 +192,7 @@ const AdminsTable = () => {
     },
   ];
 
-  if (pendinAdmins) {
-    return (
-      <div className="flex justify-center items-center h-[200px]">
-        Loading...
-      </div>
-    );
-  }
+  if (pendinAdmins) return <FullPageSpinner />;
 
   return (
     <div className="mt-6 bg-background p-6 rounded-lg">

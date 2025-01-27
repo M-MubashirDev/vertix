@@ -1,10 +1,12 @@
 import { UsegetStationsPackages } from "../Hooks/Admin/useServiceStations";
 import BackButton from "../UI/BackButton";
 import CarWashServicesCard from "../UI/CarWashServicesCard";
+import FullPageSpinner from "../UI/Spinner";
 
 function Packages() {
   const { dataPackages, pendingPackage } = UsegetStationsPackages(); // Fetch data using your custom hook
   console.log(dataPackages, "😊😊");
+  if (pendingPackage) return <FullPageSpinner />;
   return (
     <section>
       <div className="min-h-screen">

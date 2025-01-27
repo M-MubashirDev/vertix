@@ -4,14 +4,14 @@ import {
   getServiceStations,
   postServiceStations,
 } from "../../Services/ServiceStation";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export function UsegetServiceStations() {
   const { adminId } = useParams();
   const {
     data: dataStations = [], // Default to an empty array
-    isLoading: pendinStation,
+    isPending: pendinStation,
     error,
   } = useQuery({
     queryKey: ["getStations", adminId], // Add adminId to the query key
@@ -55,16 +55,18 @@ export function UsegetStationsUsers() {
 }
 // postServiceStations
 export function usePostStationMutate() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const {
     mutate: postStations,
-    isLoading: isPendingStation,
     isSuccess,
+    isPending: isPendingStation,
   } = useMutation({
     mutationFn: postServiceStations, // The update function you’ve defined earlier
     onSuccess: () => {
-      toast.success("Station has been created");
       queryClient.invalidateQueries(["getStations"]);
+      navigate("/");
+      toast.success("Station has been created");
     },
     onError: (error) => {
       toast.error("Please Try Again: " + error.message);
@@ -78,7 +80,7 @@ export function useDeleteStations() {
   const queryClient = useQueryClient();
   const {
     mutate: deleteStationMutate,
-    isLoading: isPendingDelete,
+    isPending: isPendingDelete,
     isSuccess,
   } = useMutation({
     mutationFn: deleteStation,

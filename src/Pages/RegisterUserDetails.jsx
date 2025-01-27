@@ -143,6 +143,7 @@
 // export default RegisterUserDetails;
 import { useState } from "react";
 import { UsegetStationsUsers } from "../Hooks/Admin/useServiceStations";
+import FullPageSpinner from "../UI/Spinner";
 
 function RegisterUserDetails() {
   const { dataStationUsers, pendingStationUsers } = UsegetStationsUsers();
@@ -178,11 +179,7 @@ function RegisterUserDetails() {
     });
 
   if (pendingStationUsers) {
-    return (
-      <div className="flex justify-center items-center h-[200px]">
-        Loading...
-      </div>
-    );
+    return <FullPageSpinner />;
   }
 
   return (

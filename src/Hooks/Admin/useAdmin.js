@@ -6,6 +6,7 @@ import {
   updateAdmins,
 } from "../../Services/Admin";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export function UsegetAdmins() {
   const {
@@ -21,6 +22,8 @@ export function UsegetAdmins() {
 // hooks/usePostAdmin.js
 
 export function useNewAdminMutate() {
+  const navigate = useNavigate();
+
   const queryClient = useQueryClient();
   const {
     mutate: mutateAdmin,
@@ -29,8 +32,9 @@ export function useNewAdminMutate() {
   } = useMutation({
     mutationFn: postAdmin,
     onSuccess: () => {
-      toast.success("Admin has been created");
       queryClient.invalidateQueries(["getAdmins"]);
+      navigate("/");
+      toast.success("Admin has been created");
     },
     onError: (error) => {
       toast.error("Please Try Again: " + error.message);
@@ -61,6 +65,7 @@ export function useDeleteAdminMutate() {
   return { deleteAdmin, isPendingDelete, isSuccess };
 }
 export function useUpdateAdminMutate() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const {
     mutate: updateAdmin,
@@ -69,8 +74,9 @@ export function useUpdateAdminMutate() {
   } = useMutation({
     mutationFn: updateAdmins, // The update function you’ve defined earlier
     onSuccess: () => {
-      toast.success("Admin has been Updated");
       queryClient.invalidateQueries(["getAdmins"]);
+      navigate("/");
+      toast.success("Admin has been Updated");
     },
     onError: (error) => {
       toast.error("Please Try Again: " + error.message);
