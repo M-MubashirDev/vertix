@@ -409,13 +409,12 @@ function ButtonSubmit({ children, isSubmitting }) {
         isSubmitting ? "opacity-50 cursor-not-allowed" : ""
       }`}
     >
-      <span className="relative z-10">
+      <span className="relative flex justify-center z-10">
         {isSubmitting ? <Spinner /> : children}
       </span>
     </button>
   );
 }
-
 // Export Subcomponents
 Form.ButtonSubmit = ButtonSubmit;
 Form.ConfirmPasswordInput = ConfirmPasswordInput;

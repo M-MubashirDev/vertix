@@ -24,7 +24,7 @@ function ViewAdmin() {
   // Service Station Hooks
   const { deleteStationMutate, isPendingDelete } = useDeleteStations();
   const { dataStations, pendinStation } = UsegetServiceStations();
-
+  console.log(dataStations, "😎😎");
   useEffect(() => {
     console.log(dataStations);
   }, [dataStations]);
@@ -162,6 +162,15 @@ function ViewAdmin() {
                 >
                   <FaTrashAlt className="h-5 w-5" />
                 </button>
+
+                {/* Station Image */}
+                <div className="w-full h-40 mb-4 overflow-hidden rounded-lg">
+                  <img
+                    src={station.image}
+                    alt={station.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
                 {/* Station Details */}
                 <h4 className="font-bold text-xl mb-2">{station.name}</h4>

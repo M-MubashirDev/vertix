@@ -85,13 +85,22 @@ function CreateStations() {
   const { postStations, isPendingStation } = usePostStationMutate();
 
   const handleCreateStation = async (data) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("location", data.location);
+    formData.append("address", data.address);
+    formData.append("latitude", data.latitude);
+    formData.append("longitude", data.longitude);
+    formData.append("adminId", adminId);
+    if (data.image) {
+      formData.append("image", data.image);
+    }
+    console.log(data.image);
     postStations({
       url: "service-station",
-      data: { adminId: adminId, ...data },
+      data: formData,
     });
   };
-  console.log(isPendingStation);
 
   return (
     <div className="mt-10 p-8 rounded-lg">

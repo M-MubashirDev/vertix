@@ -9,12 +9,11 @@ async function postAdmin({ url, data }) {
       data,
       {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    console.log(response);
+    console.log(response, data, "🌏🌏");
     return response;
   } catch (err) {
     HandleError(err);

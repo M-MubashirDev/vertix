@@ -27,13 +27,13 @@ export function useNewAdminMutate() {
   const queryClient = useQueryClient();
   const {
     mutate: mutateAdmin,
-    isLoading: isPending,
+    isPending: isPending,
     isSuccess,
   } = useMutation({
     mutationFn: postAdmin,
     onSuccess: () => {
       queryClient.invalidateQueries(["getAdmins"]);
-      navigate("/");
+      // navigate("/");
       toast.success("Admin has been created");
     },
     onError: (error) => {
@@ -48,7 +48,7 @@ export function useDeleteAdminMutate() {
   const queryClient = useQueryClient();
   const {
     mutate: deleteAdmin,
-    isLoading: isPendingDelete,
+    isPending: isPendingDelete,
     isSuccess,
   } = useMutation({
     mutationFn: deleteAdmins,
@@ -69,7 +69,7 @@ export function useUpdateAdminMutate() {
   const queryClient = useQueryClient();
   const {
     mutate: updateAdmin,
-    isLoading: isPendingUpdate,
+    isPending: isPendingUpdate,
     isSuccess,
   } = useMutation({
     mutationFn: updateAdmins, // The update function you’ve defined earlier

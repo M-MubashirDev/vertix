@@ -22,18 +22,17 @@ async function getServiceStations({ url }) {
 
 async function postServiceStations({ url, data }) {
   const token = localStorage.getItem("authToken");
-
   try {
     const response = await axios.post(
       `http://localhost:5000/api/${url}`,
       data, // Pass the data here
       {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
+    console.log(data, response.data);
     return response.data; // Return the response data
   } catch (err) {
     HandleError(err); // Handle errors properly

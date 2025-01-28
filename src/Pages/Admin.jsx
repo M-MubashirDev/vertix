@@ -8,17 +8,28 @@ function Admin() {
   const navigate = useNavigate();
   function submitFunc(values) {
     if (!values) return;
-    console.log(values.profileImage);
-    const data = {
-      firstname: values.firstname,
-      lastname: values.lastname,
-      email: values.email,
-      image: "",
-      password: values.password,
-      cellno: values.number,
-    };
-    mutateAdmin({ url: "create-admin", data });
+
+    const formData = new FormData(); // Create a FormData object
+
+    // Append text fields
+    formData.append("firstname", values.firstname);
+    formData.append("lastname", values.lastname);
+    formData.append("email", values.email);
+    formData.append("password", values.password);
+    formData.append("cellno", values.number);
+
+    // Append the file
+    if (values.profileImage) {
+      formData.append("image", values.profileImage); // Key name 'image' matches the backend's Multer setup
+    }
+
+    // Call the mutation function
+    mutateAdmin({
+      url: "create-admin",
+      data: formData, // Pass the FormData object
+    });
   }
+
   if (newAdminPend) return <FullPageSpinner />;
   return (
     <div className="mt-8">
@@ -76,11 +87,9 @@ function Admin() {
             label="Upload Image"
             name="profileImage"
             accept="image/*"
-            // validation={{
-            //   required: "Image is required",
-            //   validate: (value) =>
-            //     value.size < 5 * 1024 * 1024 || "File must be less than 5MB",
-            // }}
+            validation={{
+              required: "Image is required",
+            }}
           />
 
           {/* <CustomForm.ButtonSubmit>New Admin</CustomForm.ButtonSubmit> */}

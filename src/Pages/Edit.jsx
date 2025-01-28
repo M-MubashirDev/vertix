@@ -11,14 +11,25 @@ function Edit() {
   const currentAdmin = admins?.find((val) => val._id === adminId);
   const navigate = useNavigate();
 
-  const { updateAdmin, isPendingUpdate } = useUpdateAdminMutate(); //update api
+  const { updateAdmin, isPendingUpdate } = useUpdateAdminMutate(); // Update API
 
   function SubmitData(value) {
     if (!value) return;
+
+    const formData = new FormData(); // Use FormData to send both text and file data
+    formData.append("firstname", value.firstname);
+    formData.append("lastname", value.lastname);
+    formData.append("email", value.email);
+    formData.append("cellno", value.cellno);
+
+    if (value.profileImage) {
+      formData.append("image", value.profileImage); // Add the image file to the FormData
+    }
+    console.log(formData);
     updateAdmin({
       url: "update-admin",
       id: adminId,
-      updatedData: value,
+      updatedData: formData,
     });
   }
 
@@ -51,7 +62,11 @@ function Edit() {
         <Form.Input label="Last Name" name="lastname" />
         <Form.Input label="Email" name="email" type="email" />
         <Form.Input label="Phone Number" name="cellno" />
-        {/* <Form.ButtonSubmit>Save Changes</Form.ButtonSubmit> */}
+        <Form.FileInput
+          label="Upload Image"
+          name="profileImage"
+          accept="image/*"
+        />
         <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:max-w-[50rem]">
           <Form.ButtonSubmit isSubmitting={isPendingUpdate}>
             Save Changes

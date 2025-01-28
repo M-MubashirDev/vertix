@@ -38,7 +38,6 @@ export function UsegetStationsPackages() {
 }
 export function UsegetStationsUsers() {
   const { stationId } = useParams();
-  console.log(stationId, "😁😂🌏");
   const {
     data: dataStationUsers,
     isPending: pendingStationUsers,
