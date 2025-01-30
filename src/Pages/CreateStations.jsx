@@ -8,17 +8,26 @@
 //   const { postStations, isPendingStation } = usePostStationMutate();
 
 //   const handleCreateStation = async (data) => {
-//     console.log(data);
+//     const formData = new FormData();
+//     formData.append("name", data.name);
+//     formData.append("location", data.location.toLowerCase());
+//     formData.append("address", data.address);
+//     formData.append("latitude", data.latitude);
+//     formData.append("longitude", data.longitude);
+//     formData.append("adminId", adminId);
+//     if (data.image) {
+//       formData.append("image", data.image);
+//     }
+//     console.log(data.image);
 //     postStations({
 //       url: "service-station",
-//       data: { adminId: adminId, ...data },
+//       data: formData,
 //     });
 //   };
-//   console.log(isPendingStation);
 
 //   return (
-//     <div className=" mt-10  p-8 rounded-lg ">
-//       <h2 className="text-2xl font-bold text-primary-dark mb-6 text-center">
+//     <div className="mt-10 p-8 rounded-lg">
+//       <h2 className="text-4xl font-bold text-primary-dark mb-10 text-center sm:text-start">
 //         Create Service Station
 //       </h2>
 //       <Form onSubmit={handleCreateStation}>
@@ -52,19 +61,46 @@
 //           }}
 //         />
 
+//         {/* Latitude Field */}
+//         <Form.Input
+//           label="Latitude"
+//           name="latitude"
+//           type="text"
+//           validation={{
+//             required: "Latitude is required",
+//             pattern: {
+//               value: /^-?\d+(\.\d+)?$/,
+//               message: "Please enter a valid latitude",
+//             },
+//           }}
+//         />
+
+//         {/* Longitude Field */}
+//         <Form.Input
+//           label="Longitude"
+//           name="longitude"
+//           type="text"
+//           validation={{
+//             required: "Longitude is required",
+//             pattern: {
+//               value: /^-?\d+(\.\d+)?$/,
+//               message: "Please enter a valid longitude",
+//             },
+//           }}
+//         />
+
 //         {/* Image Field */}
 //         <Form.FileInput label="Station Image" name="image" accept="image/*" />
 
 //         {/* Submit Button */}
-//         {/* <Form.ButtonSubmit>Create Station</Form.ButtonSubmit> */}
 //         <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:max-w-[50rem]">
 //           <Form.ButtonSubmit isSubmitting={isPendingStation}>
-//             Create Station{" "}
+//             Create Station
 //           </Form.ButtonSubmit>
 //           <button
 //             type="button"
 //             onClick={() => navigate(-1)}
-//             className="w-full bg-gray-200  text-gray-700 py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors"
+//             className="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors"
 //           >
 //             Cancel
 //           </button>
@@ -87,7 +123,7 @@ function CreateStations() {
   const handleCreateStation = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("location", data.location.toLowerCase());
+    formData.append("location", data.location.toLowerCase()); // Convert location to lowercase
     formData.append("address", data.address);
     formData.append("latitude", data.latitude);
     formData.append("longitude", data.longitude);
@@ -126,6 +162,7 @@ function CreateStations() {
           validation={{
             required: "Location is required",
           }}
+          transform={(value) => value.toLowerCase()} // Ensure lowercase on input
         />
 
         {/* Address Field */}
