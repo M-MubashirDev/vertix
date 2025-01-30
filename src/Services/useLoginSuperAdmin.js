@@ -2,7 +2,7 @@ import axios from "axios";
 
 const loginsuperAdmin = async ({ email, password }) => {
   try {
-    const response = await axios.post("http://localhost:5000/api/login", {
+    const response = await axios.post("https://vertix-nine.vercel.app/login", {
       email,
       password,
     });

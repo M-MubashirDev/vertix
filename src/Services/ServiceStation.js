@@ -5,7 +5,7 @@ async function getServiceStations({ url }) {
   const token = localStorage.getItem("authToken");
 
   try {
-    const response = await axios.get(`http://localhost:5000/api/${url}`, {
+    const response = await axios.get(`https://vertix-nine.vercel.app/${url}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -24,7 +24,7 @@ async function postServiceStations({ url, data }) {
   const token = localStorage.getItem("authToken");
   try {
     const response = await axios.post(
-      `http://localhost:5000/api/${url}`,
+      `https://vertix-nine.vercel.app/${url}`,
       data, // Pass the data here
       {
         headers: {
@@ -46,7 +46,7 @@ const deleteStation = async ({ url, id }) => {
   const token = localStorage.getItem("authToken");
   try {
     const response = await axios.delete(
-      `http://localhost:5000/api/${url}/${id}`,
+      `https://vertix-nine.vercel.app/${url}/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

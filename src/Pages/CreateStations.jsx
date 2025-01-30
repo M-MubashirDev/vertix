@@ -87,7 +87,7 @@ function CreateStations() {
   const handleCreateStation = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("location", data.location);
+    formData.append("location", data.location.toLowerCase());
     formData.append("address", data.address);
     formData.append("latitude", data.latitude);
     formData.append("longitude", data.longitude);

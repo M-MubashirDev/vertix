@@ -5,7 +5,7 @@ async function getUsers({ url }) {
   const token = localStorage.getItem("authToken");
 
   try {
-    const response = await axios.get(`http://localhost:5000/api/${url}`, {
+    const response = await axios.get(`https://vertix-nine.vercel.app/${url}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
