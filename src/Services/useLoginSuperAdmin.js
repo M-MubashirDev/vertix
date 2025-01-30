@@ -2,10 +2,13 @@ import axios from "axios";
 
 const loginsuperAdmin = async ({ email, password }) => {
   try {
-    const response = await axios.post("https://vertix-nine.vercel.app/login", {
-      email,
-      password,
-    });
+    const response = await axios.post(
+      "https://vertix-nine.vercel.app/api/login",
+      {
+        email,
+        password,
+      }
+    );
     if (response?.data?.user?.role !== "superadmin") {
       throw new Error("Wronge Cradentials for SUperAdmin");
     }

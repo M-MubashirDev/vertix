@@ -5,7 +5,7 @@ async function postAdmin({ url, data }) {
   const token = localStorage.getItem("authToken");
   try {
     const response = await axios.post(
-      `https://vertix-nine.vercel.app/${url}`,
+      `https://vertix-nine.vercel.app/api/${url}`,
       data,
       {
         headers: {
@@ -24,12 +24,15 @@ async function getAdmins({ url }) {
   const token = localStorage.getItem("authToken");
 
   try {
-    const response = await axios.get(`https://vertix-nine.vercel.app/${url}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `https://vertix-nine.vercel.app/api/${url}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(response);
     return response.data;
   } catch (err) {
@@ -43,7 +46,7 @@ async function deleteAdmins({ url, id }) {
 
   try {
     const response = await axios.delete(
-      `https://vertix-nine.vercel.app/${url}/${id}`,
+      `https://vertix-nine.vercel.app/api/${url}/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,7 +64,7 @@ async function updateAdmins({ url, id, updatedData }) {
 
   try {
     const response = await axios.patch(
-      `https://vertix-nine.vercel.app/${url}/${id}`,
+      `https://vertix-nine.vercel.app/api/${url}/${id}`,
       updatedData,
       {
         headers: {
