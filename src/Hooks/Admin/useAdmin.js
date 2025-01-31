@@ -33,7 +33,7 @@ export function useNewAdminMutate() {
     mutationFn: postAdmin,
     onSuccess: () => {
       queryClient.invalidateQueries(["getAdmins"]);
-      // navigate("/");
+      navigate("/");
       toast.success("Admin has been created");
     },
     onError: (error) => {

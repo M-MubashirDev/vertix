@@ -2,7 +2,7 @@ import useMutateLoginSuperAdmin from "../Hooks/SuperAdmin/useMutateLoginSuperAdm
 import Form from "../UI/Form";
 
 function Login() {
-  const { superLoginMutate } = useMutateLoginSuperAdmin();
+  const { superLoginMutate, pendLogin } = useMutateLoginSuperAdmin();
 
   async function Submit(e) {
     if (!e.email || !e.password) {
@@ -53,7 +53,19 @@ function Login() {
           />
 
           {/* Submit Button */}
-          <Form.ButtonSubmit>Login</Form.ButtonSubmit>
+          {/* <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:max-w-[50rem]">
+            <Form.ButtonSubmit isSubmitting={isPendingUpdate}>
+              Save Changes
+            </Form.ButtonSubmit>
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="w-full bg-gray-200  text-gray-700 py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors"
+            >
+              Cancel
+            </button>
+          </div> */}
+          <Form.ButtonSubmit isSubmitting={pendLogin}>Login</Form.ButtonSubmit>
         </Form>
       </div>
     </div>
