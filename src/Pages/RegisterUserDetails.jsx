@@ -1,9 +1,11 @@
 // import { useState } from "react";
 // import { UsegetStationsUsers } from "../Hooks/Admin/useServiceStations";
+// import FullPageSpinner from "../UI/Spinner";
 
 // function RegisterUserDetails() {
 //   const { dataStationUsers, pendingStationUsers } = UsegetStationsUsers();
 //   console.log(dataStationUsers);
+
 //   const [searchQuery, setSearchQuery] = useState(""); // State for search input
 //   const [sortColumn, setSortColumn] = useState("userId.firstname"); // State for sorting column
 //   const [sortOrder, setSortOrder] = useState("asc"); // State for sorting order
@@ -13,6 +15,7 @@
 //     { label: "Car Name", value: "carName" },
 //     { label: "Number Plate", value: "carNumber" },
 //     { label: "Station Name", value: "serviceStationId.name" },
+//     { label: "Package Name", value: "packageId.title" },
 //   ];
 
 //   // Filter and sort data
@@ -33,11 +36,7 @@
 //     });
 
 //   if (pendingStationUsers) {
-//     return (
-//       <div className="flex justify-center items-center h-[200px]">
-//         Loading...
-//       </div>
-//     );
+//     return <FullPageSpinner />;
 //   }
 
 //   return (
@@ -81,20 +80,23 @@
 //         <table className="min-w-full bg-white border rounded-md">
 //           <thead className="bg-primary-dark text-white">
 //             <tr>
-//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/5">
+//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/6">
 //                 Name
 //               </th>
-//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/5">
+//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/6">
 //                 Car Details
 //               </th>
-//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/5">
+//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/6">
 //                 Number Plate
 //               </th>
-//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/5">
+//               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/6">
 //                 Owner Address
 //               </th>
-//               <th className="py-3 px-4 text-center text-sm uppercase font-semibold w-1/5">
+//               <th className="py-3 px-4 text-center text-sm uppercase font-semibold w-1/6">
 //                 Station
+//               </th>
+//               <th className="py-3 px-4 text-center text-sm uppercase font-semibold w-1/6">
+//                 Package
 //               </th>
 //             </tr>
 //           </thead>
@@ -105,28 +107,34 @@
 //                   key={user._id}
 //                   className="border-b hover:bg-neutral-light transition duration-150"
 //                 >
-//                   <td className="py-3 px-4 w-1/5">
+//                   <td className="py-3 px-4 w-1/6">
 //                     <span className="font-bold text-primary-dark">
 //                       {user.userId.firstname} {user.userId.lastname}
 //                     </span>
 //                   </td>
-//                   <td className="py-3 px-4 w-1/5">
+//                   <td className="py-3 px-4 w-1/6">
 //                     <p className="font-medium">{user.carName}</p>
 //                     <p className="text-sm text-slate-400">
 //                       {user.carModel} | {user.carColor}
 //                     </p>
 //                   </td>
-//                   <td className="py-3 px-4 w-1/5">{user.carNumber}</td>
-//                   <td className="py-3 px-4 w-1/5">{user.ownerAddress}</td>
-//                   <td className="py-3 px-4 text-center w-1/5">
+//                   <td className="py-3 px-4 w-1/6">{user.carNumber}</td>
+//                   <td className="py-3 px-4 w-1/6">{user.ownerAddress}</td>
+//                   <td className="py-3 px-4 text-center w-1/6">
 //                     {user.serviceStationId.name}
+//                   </td>
+//                   <td className="py-3 px-4 text-center w-1/6">
+//                     <p className="font-medium">{user?.packageId?.title}</p>
+//                     <p className="text-sm text-slate-400">
+//                       ${user?.packageId?.price}
+//                     </p>
 //                   </td>
 //                 </tr>
 //               ))
 //             ) : (
 //               <tr>
 //                 <td
-//                   colSpan="5"
+//                   colSpan="6"
 //                   className="py-10 text-center align-middle text-gray-500"
 //                 >
 //                   No users found
@@ -161,13 +169,30 @@ function RegisterUserDetails() {
     { label: "Package Name", value: "packageId.title" },
   ];
 
+  // Helper function to recursively collect all values from an object
+  const flattenValues = (obj) => {
+    let values = [];
+    Object.values(obj).forEach((value) => {
+      if (value && typeof value === "object") {
+        values = values.concat(flattenValues(value));
+      } else {
+        values.push(value);
+      }
+    });
+    return values;
+  };
+
   // Filter and sort data
   const filteredAndSortedUsers = dataStationUsers
-    ?.filter((user) =>
-      Object.values(user).some((value) =>
-        String(value).toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    )
+    ?.filter((user) => {
+      // Get all nested values in the user object and convert them to lower case strings
+      const allValues = flattenValues(user).map((val) =>
+        String(val).toLowerCase()
+      );
+      return allValues.some((value) =>
+        value.includes(searchQuery.toLowerCase())
+      );
+    })
     ?.sort((a, b) => {
       const getValue = (obj, path) =>
         path.split(".").reduce((o, key) => o?.[key], obj);
@@ -187,16 +212,16 @@ function RegisterUserDetails() {
       <h2 className="text-xl font-bold text-primary-dark mb-4">User Details</h2>
 
       {/* Search and Sorting Controls */}
-      <div className="mb-4 flex justify-between items-center">
+      <div className="mb-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         {/* Search Input */}
         <input
           type="text"
           placeholder="Search by any field..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="p-2 border rounded-md w-1/3"
+          className="p-2 border rounded-md w-full md:w-1/3"
         />
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
           {/* Sorting Dropdown */}
           <select
             value={sortColumn}
