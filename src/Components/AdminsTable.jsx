@@ -263,7 +263,7 @@ const AdminsTable = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full  lg:w-[40%] px-4 py-2 text-lg rounded-full border border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-light"
         />
-        <div className="flex flex-col sm:flex-row gap-4 justify-between w-full items-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-between lg:justify-end w-full items-center">
           {/* Sorting Dropdown */}
           <select
             value={sortColumn}
@@ -276,16 +276,16 @@ const AdminsTable = () => {
               </option>
             ))}
           </select>
-          <div className="flex sm:flex-row flex-col gap-4">
+          <div className="flex sm:flex-row flex-col  gap-4">
             <button
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-              className=" bg-primary-dark w-32 h-10  text-white rounded-full"
+              className=" bg-primary-dark w-36   h-10  text-white rounded-full"
             >
               {sortOrder === "asc" ? "Ascending" : "Descending"}
             </button>
             <button
               onClick={() => navigate("/admin")}
-              className=" bg-primary-dark w-32 h-10  text-white rounded-full"
+              className=" bg-primary-dark w-36 h-10  text-white rounded-full"
             >
               New Admin
             </button>
