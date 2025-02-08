@@ -182,7 +182,7 @@
 
 // export default AdminsTable;
 import { useState } from "react";
-import { FaEdit, FaTrashAlt, FaEye } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaEye, FaCaretDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../UI/DropDown";
 import { useDeleteAdminMutate } from "../Hooks/Admin/useAdmin";
@@ -264,18 +264,22 @@ const AdminsTable = () => {
           className="w-full  lg:w-[40%] px-4 py-2 text-lg rounded-full border border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-light"
         />
         <div className="flex flex-col sm:flex-row gap-4 justify-between lg:justify-end w-full items-center">
-          {/* Sorting Dropdown */}
-          <select
-            value={sortColumn}
-            onChange={(e) => setSortColumn(e.target.value)}
-            className=" border rounded-full w-30 px-4   h-10 "
-          >
-            {sortingOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                Sort by {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              value={sortColumn}
+              onChange={(e) => setSortColumn(e.target.value)}
+              className="border rounded-full w-40 px-4 h-10 appearance-none pr-8"
+            >
+              {sortingOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  Sort by {option.label}
+                </option>
+              ))}
+            </select>
+            <span className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <FaCaretDown className="h-4 w-4 text-gray-500" />
+            </span>
+          </div>
           <div className="flex sm:flex-row flex-col  gap-4">
             <button
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}

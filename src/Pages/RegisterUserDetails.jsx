@@ -18,13 +18,30 @@
 //     { label: "Package Name", value: "packageId.title" },
 //   ];
 
+//   // Helper function to recursively collect all values from an object
+//   const flattenValues = (obj) => {
+//     let values = [];
+//     Object.values(obj).forEach((value) => {
+//       if (value && typeof value === "object") {
+//         values = values.concat(flattenValues(value));
+//       } else {
+//         values.push(value);
+//       }
+//     });
+//     return values;
+//   };
+
 //   // Filter and sort data
 //   const filteredAndSortedUsers = dataStationUsers
-//     ?.filter((user) =>
-//       Object.values(user).some((value) =>
-//         String(value).toLowerCase().includes(searchQuery.toLowerCase())
-//       )
-//     )
+//     ?.filter((user) => {
+//       // Get all nested values in the user object and convert them to lower case strings
+//       const allValues = flattenValues(user).map((val) =>
+//         String(val).toLowerCase()
+//       );
+//       return allValues.some((value) =>
+//         value.includes(searchQuery.toLowerCase())
+//       );
+//     })
 //     ?.sort((a, b) => {
 //       const getValue = (obj, path) =>
 //         path.split(".").reduce((o, key) => o?.[key], obj);
@@ -44,16 +61,16 @@
 //       <h2 className="text-xl font-bold text-primary-dark mb-4">User Details</h2>
 
 //       {/* Search and Sorting Controls */}
-//       <div className="mb-4 flex justify-between items-center">
+//       <div className="mb-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
 //         {/* Search Input */}
 //         <input
 //           type="text"
 //           placeholder="Search by any field..."
 //           value={searchQuery}
 //           onChange={(e) => setSearchQuery(e.target.value)}
-//           className="p-2 border rounded-md w-1/3"
+//           className="p-2 border rounded-md w-full md:w-1/3"
 //         />
-//         <div className="flex gap-4 items-center">
+//         <div className="flex flex-col sm:flex-row gap-4 items-center">
 //           {/* Sorting Dropdown */}
 //           <select
 //             value={sortColumn}
@@ -152,6 +169,7 @@
 import { useState } from "react";
 import { UsegetStationsUsers } from "../Hooks/Admin/useServiceStations";
 import FullPageSpinner from "../UI/Spinner";
+import { FaCaretDown } from "react-icons/fa";
 
 function RegisterUserDetails() {
   const { dataStationUsers, pendingStationUsers } = UsegetStationsUsers();
@@ -219,33 +237,37 @@ function RegisterUserDetails() {
           placeholder="Search by any field..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="p-2 border rounded-md w-full md:w-1/3"
+          className="w-full  lg:w-[40%] px-4 py-2 text-lg rounded-full border border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-light"
         />
         <div className="flex flex-col sm:flex-row gap-4 items-center">
-          {/* Sorting Dropdown */}
-          <select
-            value={sortColumn}
-            onChange={(e) => setSortColumn(e.target.value)}
-            className="p-2 border rounded-md"
-          >
-            {sortingOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                Sort by {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              value={sortColumn}
+              onChange={(e) => setSortColumn(e.target.value)}
+              className="border rounded-full w-40 px-4 h-10 appearance-none pr-8"
+            >
+              {sortingOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  Sort by {option.label}
+                </option>
+              ))}
+            </select>
+            <span className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <FaCaretDown className="h-4 w-4 text-gray-500" />
+            </span>
+          </div>
           {/* Sorting Order Toggle */}
           <button
             onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-            className="p-2 bg-primary-dark text-white rounded-md"
+            className="bg-primary-dark w-36   h-10  text-white rounded-full"
           >
             {sortOrder === "asc" ? "Ascending" : "Descending"}
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto min-h-[50vh] max-h-screen scrollbar-thin shadow-md">
-        <table className="min-w-full bg-white border rounded-md">
+      <div className="overflow-x-auto min-h-[50vh] max-h-screen scrollbar-thin shadow-md rounded-lg">
+        <table className="min-w-full bg-white border rounded-lg">
           <thead className="bg-primary-dark text-white">
             <tr>
               <th className="py-3 px-4 text-left text-sm uppercase font-semibold w-1/6">
