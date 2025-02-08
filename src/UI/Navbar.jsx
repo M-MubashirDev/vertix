@@ -79,7 +79,7 @@ const Navbar = () => {
     localStorage.removeItem("authToken");
   }
   return (
-    <nav className="bg-primary-dark text-white p-4 max-w-[1440px] mx-auto rounded-b-md w-[90%]">
+    <nav className="bg-primary-dark text-white p-4 ">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
           <Link to="/" className="text-secondary-light">
@@ -90,9 +90,9 @@ const Navbar = () => {
             />
           </Link>
         </div>
-        <ul className="hidden md:flex space-x-8 items-center">
+        <ul className=" md:flex space-x-8 items-center">
           {/* Add "Create New Admin" link */}
-          <li>
+          {/* <li>
             <Link
               to="/admin"
               className="flex items-center space-x-2 hover:text-neutral-light transition duration-200"
@@ -102,7 +102,7 @@ const Navbar = () => {
                 icon={<FaUserPlus className="text-white w-[17px] h-[17px]" />}
               />
             </Link>
-          </li>
+          </li> */}
           <li onClick={logout}>
             <Link
               to="/login"
@@ -118,16 +118,15 @@ const Navbar = () => {
           </li>
           {/* Expandable Button */}
         </ul>
-        <button
+        {/* <button
           className="md:hidden text-white hover:text-secondary-light"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           ☰
-        </button>
+        </button> */}
       </div>
-      {isMenuOpen && (
+      {/* {isMenuOpen && (
         <ul className="md:hidden bg-primary-dark text-white p-4 space-y-2">
-          {/* Add "Create New Admin" link for mobile */}
           <li>
             <Link
               to="admin"
@@ -138,7 +137,7 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-      )}
+      )} */}
     </nav>
   );
 };
