@@ -84,7 +84,7 @@ const Navbar = () => {
         <div className="text-2xl font-bold">
           <Link to="/" className="text-secondary-light">
             <img
-              src="logowhite.png"
+              src="/logowhite.png"
               alt="LOGO"
               className="max-w-32 min-w-32 w-32  "
             />
