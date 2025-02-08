@@ -68,7 +68,7 @@ function ViewAdmin() {
             <h2 className="text-primary-dark text-3xl md:text-4xl font-semibold mb-6 ">
               Admin Details
             </h2>
-            <div className="flex flex-col sm:flex-row text-center items-center gap-2">
+            <div className="flex flex-col sm:flex-row text-center s items-center gap-2">
               <div className="flex gap-2">
                 <FaUserShield className="text-primary-dark text-xl" />
                 <span className="font-semibold text-primary-dark">Name:</span>
