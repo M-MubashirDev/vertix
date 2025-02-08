@@ -80,7 +80,7 @@ const Navbar = () => {
   }
   return (
     <nav className="bg-primary-dark text-white p-4 ">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto max-w-[1440px] w-[90%] flex justify-between items-center">
         <div className="text-2xl font-bold">
           <Link to="/" className="text-secondary-light">
             <img
