@@ -202,7 +202,7 @@ const AdminsTable = () => {
   const sortingOptions = [
     { label: "Name", value: "firstname" },
     { label: "Email", value: "email" },
-    { label: "Phone", value: "cellno" },
+    // { label: "Phone", value: "cellno" },
   ];
 
   // Sort and filter data
