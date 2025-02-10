@@ -30,9 +30,11 @@ function Packages() {
           {pendingPackage ? (
             <p className="text-center text-gray-500">Loading packages...</p>
           ) : dataPackages && dataPackages.length > 0 ? (
-            dataPackages.map((service) => (
-              <CarWashServicesCard key={service._id} service={service} />
-            ))
+            <div className="flex gap-6 flex-wrap">
+              {dataPackages.map((service) => (
+                <CarWashServicesCard key={service._id} service={service} />
+              ))}
+            </div>
           ) : (
             <p className="text-center text-gray-500">
               There are no packages available.

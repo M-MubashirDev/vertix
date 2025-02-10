@@ -246,12 +246,14 @@ const AdminsTable = () => {
       },
     },
   ];
-
+  console.log(filteredAndSortedAdmins);
   if (pendinAdmins) return <FullPageSpinner />;
 
   return (
     <div className="mt-6 bg-background p-6 rounded-lg">
-      <h2 className="text-xl font-bold text-primary-dark mb-4">Admin List</h2>
+      <h2 className="text-xl font-bold text-center sm:text-start text-primary-dark mb-4">
+        Admin List
+      </h2>
 
       {/* Search and Sorting Controls */}
       <div className="mb-4 flex flex-col lg:flex-row md:justify-between md:items-center gap-4">
